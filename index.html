@@ -3,60 +3,71 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Sonatus Persona Validation Survey</title>
+<title>Sonatus Persona Validation</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap');
-:root{
-  --bg:#f3f4f6;--surface:#fff;--surface2:#f9fafb;--border:#e5e7eb;--border2:#d1d5db;
-  --ink:#111827;--ink2:#374151;--ink3:#6b7280;--ink4:#9ca3af;
-  --accent:#4f46e5;--accent-l:#eef2ff;--accent-d:#3730a3;
-  --ian-dark:#064e3b;--ian-acc:#059669;--ian-light:#ecfdf5;--ian-border:#6ee7b7;
-  --sam-dark:#1e3a5f;--sam-acc:#2563eb;--sam-light:#eff6ff;--sam-border:#93c5fd;
-  --fiona-dark:#3b0764;--fiona-acc:#7c3aed;--fiona-light:#faf5ff;--fiona-border:#c4b5fd;
-  --danger:#dc2626;--success:#059669;--success-l:#ecfdf5;
-  --r:8px;--r-lg:14px;--r-xl:18px;
+
+:root {
+  --bg:#f3f4f6; --surface:#fff; --surface2:#f9fafb; --border:#e5e7eb; --border2:#d1d5db;
+  --ink:#111827; --ink2:#374151; --ink3:#6b7280; --ink4:#9ca3af;
+  --accent:#4f46e5; --accent-l:#eef2ff; --accent-d:#3730a3;
+  --ian-dark:#064e3b; --ian-acc:#059669; --ian-light:#ecfdf5; --ian-border:#6ee7b7;
+  --sam-dark:#1e3a5f; --sam-acc:#2563eb; --sam-light:#eff6ff; --sam-border:#93c5fd;
+  --fiona-dark:#3b0764; --fiona-acc:#7c3aed; --fiona-light:#faf5ff; --fiona-border:#c4b5fd;
+  --danger:#dc2626; --success:#059669; --success-l:#ecfdf5;
+  --r:8px; --r-lg:14px; --r-xl:18px;
+  --hdr-h:56px;
+  --stepper-h:96px;
+  --nav-h:64px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.6}
+html,body{height:100%;overflow:hidden}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:14px;display:flex;flex-direction:column}
 
-.site-hdr{background:#0f172a;padding:.875rem 2rem;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:100;border-bottom:1px solid #1e293b}
+/* ── HEADER ── */
+.site-hdr{height:var(--hdr-h);background:#0f172a;display:flex;align-items:center;padding:0 2rem;gap:10px;flex-shrink:0;border-bottom:1px solid #1e293b;z-index:50}
 .logo{font-family:'DM Mono',monospace;font-size:11px;color:#818cf8;letter-spacing:.08em}
 .hdr-sep{color:#334155;font-size:16px}
 .hdr-doc{font-size:12px;color:#64748b}
-.hdr-badge{margin-left:auto;background:#1e293b;color:#94a3b8;font-size:10px;font-family:'DM Mono',monospace;padding:3px 8px;border-radius:20px}
+.hdr-right{margin-left:auto;font-size:11px;color:#6b7280;font-family:'DM Mono',monospace}
 
-.hero{background:#0f172a;padding:3rem 2rem 2.5rem;border-bottom:1px solid #1e293b}
-.hero-inner{max-width:860px;margin:0 auto}
-.eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#818cf8;margin-bottom:.75rem}
-.hero h1{font-size:clamp(1.75rem,4vw,2.75rem);font-weight:600;color:#f8fafc;line-height:1.2;margin-bottom:1rem}
-.hero h1 em{font-style:italic;color:#a5b4fc;font-weight:400}
-.hero p{font-size:14px;color:#94a3b8;max-width:520px;line-height:1.75;margin-bottom:1.5rem}
-.chip-row{display:flex;gap:6px;flex-wrap:wrap}
-.chip{font-size:11px;padding:3px 10px;border-radius:20px;border:1px solid #334155;color:#64748b;font-family:'DM Mono',monospace}
+/* ── STEPPER ── */
+.stepper{height:var(--stepper-h);background:#0f172a;border-bottom:1px solid #1e293b;flex-shrink:0;display:flex;flex-direction:column;justify-content:center;padding:0 2rem;gap:14px}
+.lifecycle{display:flex;align-items:center;gap:0;max-width:860px}
+.lc-stage{display:flex;align-items:center;gap:0;flex:1}
+.lc-dot{width:8px;height:8px;border-radius:50%;background:#1e293b;border:1.5px solid #334155;flex-shrink:0;transition:all .25s}
+.lc-line{flex:1;height:1px;background:#1e293b;transition:background .25s}
+.lc-label{font-size:10px;font-family:'DM Mono',monospace;color:#475569;white-space:nowrap;margin-left:6px;transition:color .25s}
+.lc-stage.active .lc-dot{background:#818cf8;border-color:#818cf8;box-shadow:0 0 0 3px rgba(129,140,248,.2)}
+.lc-stage.active .lc-label{color:#a5b4fc}
+.lc-stage.done .lc-dot{background:#059669;border-color:#059669}
+.lc-stage.done .lc-line{background:#059669}
+.lc-stage.done .lc-label{color:#34d399}
 
-.prog-outer{background:#0f172a;padding:.75rem 2rem 1rem;border-bottom:1px solid #1e293b}
-.prog-inner{max-width:860px;margin:0 auto}
-.prog-track{height:2px;background:#1e293b;border-radius:1px;overflow:hidden}
-.prog-fill{height:100%;background:#818cf8;border-radius:1px;transition:width .3s;width:0%}
-.prog-txt{font-size:11px;color:#475569;margin-top:6px;font-family:'DM Mono',monospace}
+.steps-row{display:flex;align-items:center;gap:8px;max-width:860px}
+.step-pip{width:6px;height:6px;border-radius:50%;background:#1e293b;border:1px solid #334155;transition:all .25s;flex-shrink:0}
+.step-pip.active{background:#818cf8;border-color:#818cf8;width:20px;border-radius:3px}
+.step-pip.done{background:#059669;border-color:#059669}
+.steps-meta{font-size:11px;color:#475569;font-family:'DM Mono',monospace;margin-left:8px}
+.steps-meta b{color:#94a3b8}
 
-.main{max-width:860px;margin:0 auto;padding:2.5rem 2rem 6rem}
+/* ── BODY LAYOUT ── */
+.body-wrap{flex:1;overflow:hidden;display:flex;flex-direction:column}
+.page{display:none;flex:1;overflow:hidden}
+.page.active{display:flex;flex-direction:column}
+.two-col{flex:1;display:grid;grid-template-columns:1fr 1fr;overflow:hidden;gap:0}
+.col-left{overflow-y:auto;border-right:1px solid var(--border);background:var(--surface2)}
+.col-right{overflow-y:auto;background:var(--surface)}
 
-.sec-hdr{margin-bottom:1.75rem;padding-bottom:1.125rem;border-bottom:1px solid var(--border)}
-.sec-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink4);margin-bottom:.375rem}
-.sec-title{font-size:18px;font-weight:600;color:var(--ink)}
-.sec-sub{font-size:13px;color:var(--ink3);margin-top:3px}
-.divider{height:1px;background:var(--border);margin:2.75rem 0}
+/* single col pages (closing) */
+.one-col{flex:1;overflow-y:auto;background:var(--surface)}
+.one-col-inner{max-width:640px;margin:0 auto;padding:2rem}
 
-.rev-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2rem}
-@media(max-width:560px){.rev-grid{grid-template-columns:1fr}}
-.fld>label{display:block;font-size:11px;font-weight:500;color:var(--ink2);margin-bottom:5px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.05em}
-.fld input,.fld select{width:100%;height:40px;padding:0 .875rem;border:1px solid var(--border2);border-radius:var(--r);font-family:'Inter',sans-serif;font-size:13px;color:var(--ink);background:var(--surface);transition:border-color .15s,box-shadow .15s}
-.fld input:focus,.fld select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(79,70,229,.1)}
-.req{color:var(--danger);margin-left:1px}
+/* ── COL CONTENT ── */
+.col-inner{padding:2rem}
 
-/* PERSONA CARD */
-.pcard{border-radius:var(--r-xl);overflow:hidden;border:1px solid var(--border);background:var(--surface);margin-bottom:2rem;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+/* ── PCARD (reuse from v3) ── */
+.pcard{border-radius:var(--r-xl);overflow:hidden;border:1px solid var(--border);background:var(--surface);margin-bottom:1.5rem;box-shadow:0 2px 8px rgba(0,0,0,.06)}
 .pcard-hdr{padding:1.5rem 1.75rem;display:flex;align-items:flex-start;gap:1rem}
 .pcard-hdr.ian{background:var(--ian-dark)}
 .pcard-hdr.sam{background:var(--sam-dark)}
@@ -68,113 +79,116 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--i
 .pcard-name{font-size:20px;font-weight:600;color:#fff;margin-bottom:2px}
 .pcard-role{font-size:12px;color:rgba(255,255,255,.65);font-family:'DM Mono',monospace}
 .pcard-quote{font-size:13px;font-style:italic;color:rgba(255,255,255,.75);margin-top:.875rem;line-height:1.65;border-top:1px solid rgba(255,255,255,.12);padding-top:.875rem}
-
 .pcard-body{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--border)}
-@media(max-width:640px){.pcard-body{grid-template-columns:1fr}}
-.pcard-col{padding:1.375rem 1.5rem}
+.pcard-col{padding:1.25rem 1.375rem}
 .pcard-col+.pcard-col{border-left:1px solid var(--border)}
-@media(max-width:640px){.pcard-col+.pcard-col{border-left:none;border-top:1px solid var(--border)}}
-.col-label{font-size:10px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:var(--ink4);margin-bottom:.875rem;font-family:'DM Mono',monospace}
-.role-text{font-size:13px;color:var(--ink2);line-height:1.65}
+.col-label{font-size:10px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:var(--ink4);margin-bottom:.75rem;font-family:'DM Mono',monospace}
+.role-text{font-size:12px;color:var(--ink2);line-height:1.65}
 .touch-row{display:flex;align-items:flex-start;gap:8px;margin-bottom:6px}
 .touch-badge{font-size:10px;font-weight:500;padding:2px 7px;border-radius:4px;flex-shrink:0;margin-top:2px}
 .tb-ian{background:var(--ian-light);color:var(--ian-dark)}
 .tb-sam{background:var(--sam-light);color:var(--sam-dark)}
 .tb-fiona{background:var(--fiona-light);color:var(--fiona-dark)}
 .touch-desc{font-size:12px;color:var(--ink3);line-height:1.5}
-
-.pcard-env{border-top:1px solid var(--border);padding:1.375rem 1.5rem}
-.env-lbl-row{display:flex;align-items:center;gap:8px;margin-bottom:1rem}
+.pcard-env{border-top:1px solid var(--border);padding:1.25rem 1.375rem}
+.env-lbl-row{display:flex;align-items:center;gap:8px;margin-bottom:.875rem}
 .env-sec-label{font-size:10px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:var(--ink4);font-family:'DM Mono',monospace}
-.env-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem}
-@media(max-width:580px){.env-grid{grid-template-columns:1fr}}
-.env-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r);padding:.875rem 1rem}
-.env-card-title{font-size:12px;font-weight:500;color:var(--ink);margin-bottom:.375rem}
-.env-card-body{font-size:12px;color:var(--ink3);line-height:1.55}
-
-.pcard-jtbd{border-top:1px solid var(--border);padding:1.375rem 1.5rem}
+.env-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.625rem}
+.env-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r);padding:.75rem .875rem}
+.env-card-title{font-size:11px;font-weight:500;color:var(--ink);margin-bottom:.325rem}
+.env-card-body{font-size:11px;color:var(--ink3);line-height:1.55}
+.pcard-jtbd{border-top:1px solid var(--border);padding:1.25rem 1.375rem}
 .jtbd-top-label{font-size:10px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:var(--ink4);font-family:'DM Mono',monospace;margin-bottom:.5rem}
-.jtbd-group{font-size:11px;font-weight:500;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em;margin:1rem 0 .625rem;font-family:'DM Mono',monospace}
-.jtbd-row{border:1px solid var(--border);border-radius:var(--r);padding:.875rem 1rem;margin-bottom:.5rem;background:var(--surface)}
-.jtbd-top{display:flex;align-items:center;gap:8px;margin-bottom:.625rem}
-.jtbd-num{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0;color:#fff}
+.jtbd-group{font-size:10px;font-weight:500;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em;margin:.875rem 0 .5rem;font-family:'DM Mono',monospace}
+.jtbd-row{border:1px solid var(--border);border-radius:var(--r);padding:.75rem .875rem;margin-bottom:.5rem;background:var(--surface)}
+.jtbd-top{display:flex;align-items:center;gap:8px;margin-bottom:.5rem}
+.jtbd-num{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;flex-shrink:0;color:#fff}
 .jn-ian{background:var(--ian-acc)}
 .jn-sam{background:var(--sam-acc)}
 .jn-fiona{background:var(--fiona-acc)}
-.jtbd-title{font-size:13px;font-weight:500;color:var(--ink);flex:1}
-.jtbd-badge{font-size:10px;padding:2px 7px;border-radius:20px;font-weight:500}
+.jtbd-title{font-size:12px;font-weight:500;color:var(--ink);flex:1}
+.jtbd-badge{font-size:10px;padding:2px 6px;border-radius:20px;font-weight:500}
 .jb-p{background:var(--accent-l);color:var(--accent-d)}
 .jb-s{background:var(--surface2);color:var(--ink3);border:1px solid var(--border)}
-.jtbd-lines{display:flex;flex-direction:column;gap:3px}
-.jtbd-line{font-size:12px;color:var(--ink3);line-height:1.5;padding-left:.875rem;position:relative}
-.jtbd-line::before{content:'';position:absolute;left:0;top:8px;width:4px;height:4px;border-radius:50%;background:var(--border2)}
+.jtbd-lines{display:flex;flex-direction:column;gap:2px}
+.jtbd-line{font-size:11px;color:var(--ink3);line-height:1.55;padding-left:.75rem;position:relative}
+.jtbd-line::before{content:'';position:absolute;left:0;top:7px;width:3px;height:3px;border-radius:50%;background:var(--border2)}
 .jtbd-line b{font-weight:500;color:var(--ink2)}
 
-/* QUESTIONS */
+/* ── QUESTIONS ── */
+.q-page-title{font-size:17px;font-weight:600;color:var(--ink);margin-bottom:.375rem}
+.q-page-sub{font-size:13px;color:var(--ink3);margin-bottom:1.5rem;line-height:1.6}
 .qgrp{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;margin-bottom:.875rem}
-.qgrp-hdr{padding:.625rem 1.25rem;background:var(--surface2);border-bottom:1px solid var(--border);font-size:11px;font-weight:500;color:var(--ink3);text-transform:uppercase;letter-spacing:.07em;font-family:'DM Mono',monospace}
-.qi{padding:1.125rem 1.25rem;border-bottom:1px solid var(--border)}
+.qgrp-hdr{padding:.625rem 1.25rem;background:var(--surface2);border-bottom:1px solid var(--border);font-size:10px;font-weight:500;color:var(--ink3);text-transform:uppercase;letter-spacing:.07em;font-family:'DM Mono',monospace}
+.qi{padding:1rem 1.25rem;border-bottom:1px solid var(--border)}
 .qi:last-child{border-bottom:none}
 .qi-top{display:flex;gap:9px;align-items:flex-start;margin-bottom:.75rem}
 .qnum{font-family:'DM Mono',monospace;font-size:10px;font-weight:500;color:var(--accent);background:var(--accent-l);padding:2px 6px;border-radius:4px;flex-shrink:0;margin-top:2px;min-width:32px;text-align:center}
 .qtxt{font-size:13px;color:var(--ink);line-height:1.55}
-
 .rating{display:flex;gap:5px;margin-top:.625rem}
 .rating input{display:none}
-.rating input+label{cursor:pointer;width:40px;height:40px;border-radius:var(--r);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;color:var(--ink3);transition:all .15s;background:var(--surface);user-select:none}
+.rating input+label{cursor:pointer;width:38px;height:38px;border-radius:var(--r);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;color:var(--ink3);transition:all .15s;background:var(--surface);user-select:none}
 .rating input:checked+label{background:var(--accent);border-color:var(--accent);color:#fff}
 .rating input+label:hover{border-color:var(--accent);color:var(--accent)}
 .rating-desc{display:flex;justify-content:space-between;margin-top:5px}
 .rating-desc span{font-size:10px;color:var(--ink4);max-width:110px;line-height:1.3}
 .rating-desc span:last-child{text-align:right}
-
-textarea{width:100%;min-height:80px;padding:.75rem .875rem;border:1px solid var(--border2);border-radius:var(--r);font-family:'Inter',sans-serif;font-size:13px;color:var(--ink);background:var(--surface);resize:vertical;line-height:1.55;transition:border-color .15s,box-shadow .15s;margin-top:.375rem}
+textarea{width:100%;min-height:76px;padding:.75rem .875rem;border:1px solid var(--border2);border-radius:var(--r);font-family:'Inter',sans-serif;font-size:13px;color:var(--ink);background:var(--surface);resize:vertical;line-height:1.55;transition:border-color .15s,box-shadow .15s;margin-top:.375rem}
 textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(79,70,229,.1)}
 textarea::placeholder{color:#c4c4d0}
-
-/* SUBMIT */
-.sub-zone{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1.25rem;flex-wrap:wrap;margin-top:2.5rem}
-.sub-copy{font-size:13px;color:var(--ink3);line-height:1.55}
-.sub-copy strong{color:var(--ink);font-weight:500}
-.btn-submit{background:var(--accent);color:#fff;border:none;padding:.875rem 2rem;border-radius:var(--r);font-size:14px;font-weight:600;cursor:pointer;transition:background .15s,transform .1s;white-space:nowrap;font-family:'Inter',sans-serif;min-width:200px;text-align:center}
-.btn-submit:hover{background:var(--accent-d)}
-.btn-submit:active{transform:scale(.98)}
-.btn-submit:disabled{background:var(--ink4);cursor:not-allowed}
-
-/* STATES */
-#submitting{display:none;text-align:center;padding:4rem 2rem}
-#done-screen{display:none;text-align:center;padding:4rem 2rem}
-#error-screen{display:none;text-align:center;padding:4rem 2rem}
-.state-icon{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:28px}
-.icon-success{background:var(--success-l)}
-.icon-error{background:#fef2f2}
-.state-title{font-size:22px;font-weight:600;margin-bottom:.75rem}
-.state-body{color:var(--ink3);max-width:420px;margin:0 auto 1.75rem;font-size:14px;line-height:1.7}
-.btn-outline{background:transparent;color:var(--accent);border:1px solid var(--accent);padding:.625rem 1.25rem;border-radius:var(--r);font-size:13px;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif;transition:background .15s}
-.btn-outline:hover{background:var(--accent-l)}
-.spinner{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 1.5rem}
-@keyframes spin{to{transform:rotate(360deg)}}
-.err-inline{font-size:11px;color:var(--danger);margin-top:4px;display:none}
-
-.title-input-block{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;margin-bottom:1.5rem}
-.title-input-hdr{padding:.75rem 1.25rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
-.title-input-icon{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0;color:#fff}
+.fld>label{display:block;font-size:11px;font-weight:500;color:var(--ink2);margin-bottom:5px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.05em}
+.fld input,.fld select{width:100%;height:40px;padding:0 .875rem;border:1px solid var(--border2);border-radius:var(--r);font-family:'Inter',sans-serif;font-size:13px;color:var(--ink);background:var(--surface);transition:border-color .15s}
+.fld input:focus,.fld select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(79,70,229,.1)}
+.req{color:var(--danger)}
+.rev-grid{display:grid;grid-template-columns:1fr 1fr;gap:.875rem;margin-bottom:1.5rem}
+.title-input-block{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;margin-bottom:1rem}
+.tib-hdr{padding:.75rem 1.25rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.tib-icon{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0;color:#fff}
 .tii-ian{background:var(--ian-acc)}
 .tii-sam{background:var(--sam-acc)}
 .tii-fiona{background:var(--fiona-acc)}
-.title-input-hdr-text{flex:1}
-.title-input-hdr-title{font-size:13px;font-weight:500;color:var(--ink)}
-.title-input-hdr-sub{font-size:11px;color:var(--ink3);margin-top:1px}
-.title-input-body{padding:1rem 1.25rem}
-.title-row{display:flex;gap:8px;margin-bottom:8px;align-items:center}
-.title-row input{flex:1;height:38px;padding:0 .875rem;border:1px solid var(--border2);border-radius:var(--r);font-family:'Inter',sans-serif;font-size:13px;color:var(--ink);background:var(--surface);transition:border-color .15s}
-.title-row input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(79,70,229,.1)}
+.tib-hdr-title{font-size:13px;font-weight:500;color:var(--ink)}
+.tib-hdr-sub{font-size:11px;color:var(--ink3);margin-top:1px}
+.tib-body{padding:.875rem 1.25rem}
+.tib-hint{font-size:11px;color:var(--ink4);margin-bottom:.625rem;line-height:1.5}
+.title-row{display:flex;gap:8px;margin-bottom:6px;align-items:center}
+.title-row input{flex:1;height:36px;padding:0 .875rem;border:1px solid var(--border2);border-radius:var(--r);font-family:'Inter',sans-serif;font-size:13px;color:var(--ink);background:var(--surface);transition:border-color .15s}
+.title-row input:focus{outline:none;border-color:var(--accent)}
 .title-row input::placeholder{color:#c4c4d0}
-.title-row-remove{width:30px;height:30px;border-radius:var(--r);border:1px solid var(--border2);background:var(--surface);color:var(--ink3);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;transition:all .15s;line-height:1}
-.title-row-remove:hover{border-color:var(--danger);color:var(--danger);background:#fef2f2}
-.btn-add-title{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--accent);background:none;border:1px dashed var(--border2);border-radius:var(--r);padding:6px 12px;cursor:pointer;transition:all .15s;font-family:'Inter',sans-serif;margin-top:4px}
+.trm{width:28px;height:28px;border-radius:var(--r);border:1px solid var(--border2);background:var(--surface);color:var(--ink3);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;transition:all .15s;line-height:1}
+.trm:hover{border-color:var(--danger);color:var(--danger);background:#fef2f2}
+.btn-add-title{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:500;color:var(--accent);background:none;border:1px dashed var(--border2);border-radius:var(--r);padding:5px 10px;cursor:pointer;transition:all .15s;font-family:'Inter',sans-serif;margin-top:2px}
 .btn-add-title:hover{border-color:var(--accent);background:var(--accent-l)}
-.title-hint{font-size:11px;color:var(--ink4);margin-bottom:.75rem;line-height:1.5}
+.divider{height:1px;background:var(--border);margin:1.5rem 0}
+
+/* ── BOTTOM NAV ── */
+.bottom-nav{height:var(--nav-h);background:var(--surface);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;flex-shrink:0;gap:1rem}
+.nav-left{display:flex;align-items:center;gap:.75rem}
+.nav-right{display:flex;align-items:center;gap:.75rem}
+.btn-prev{background:transparent;border:1px solid var(--border2);color:var(--ink2);padding:.625rem 1.25rem;border-radius:var(--r);font-size:13px;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s;display:flex;align-items:center;gap:6px}
+.btn-prev:hover{border-color:var(--ink2);color:var(--ink)}
+.btn-prev:disabled{opacity:.35;cursor:not-allowed}
+.btn-next{background:var(--accent);border:none;color:#fff;padding:.625rem 1.5rem;border-radius:var(--r);font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:background .15s;display:flex;align-items:center;gap:6px}
+.btn-next:hover{background:var(--accent-d)}
+.btn-submit-main{background:var(--accent);border:none;color:#fff;padding:.625rem 1.75rem;border-radius:var(--r);font-size:14px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:background .15s}
+.btn-submit-main:hover{background:var(--accent-d)}
+.nav-progress-txt{font-size:12px;color:var(--ink3);font-family:'DM Mono',monospace}
+
+/* ── CLOSING PAGE ── */
+.closing-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;margin-bottom:.875rem}
+
+/* ── STATES ── */
+#submitting-screen,#done-screen,#error-screen{display:none;flex:1;flex-direction:column;align-items:center;justify-content:center;padding:4rem 2rem;text-align:center}
+.state-icon{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:24px}
+.icon-success{background:var(--success-l)}
+.icon-error{background:#fef2f2}
+.state-title{font-size:20px;font-weight:600;margin-bottom:.75rem}
+.state-body{color:var(--ink3);max-width:400px;margin:0 auto 1.75rem;font-size:13px;line-height:1.7}
+.spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 1.5rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+.btn-outline{background:transparent;color:var(--accent);border:1px solid var(--accent);padding:.625rem 1.25rem;border-radius:var(--r);font-size:13px;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif;transition:background .15s}
+.btn-outline:hover{background:var(--accent-l)}
+.err-inline{font-size:11px;color:var(--danger);margin-top:4px;display:none}
 </style>
 </head>
 <body>
@@ -182,66 +196,53 @@ textarea::placeholder{color:#c4c4d0}
 <header class="site-hdr">
   <span class="logo">SONATUS</span>
   <span class="hdr-sep">/</span>
-  <span class="hdr-doc">Persona Validation Survey</span>
-  <span class="hdr-badge">Internal · PM &amp; VoC</span>
+  <span class="hdr-doc">Persona Validation</span>
+  <span class="hdr-right">Internal · PM &amp; VoC</span>
 </header>
 
-<div class="hero">
-  <div class="hero-inner">
-    <div class="eyebrow">UXD Program · Command Center</div>
-    <h1>Validate our<br><em>engineering personas</em></h1>
-    <p>We've put together three persona cards that represent the key engineers who use Command Center. Take a look at each one, answer the questions below it, and share what you know from your customer conversations. The global questions are at the end once you've seen all three.</p>
-    <div class="chip-row">
-      <span class="chip">3 personas</span>
-      <span class="chip">26 questions</span>
-      <span class="chip">About 12 minutes</span>
-      <span class="chip">All responses go into one shared spreadsheet</span>
+<div class="stepper">
+  <div class="lifecycle">
+    <div class="lc-stage" id="lc-0">
+      <div class="lc-dot"></div>
+      <div class="lc-line"></div>
+      <span class="lc-label">Pre-SOP</span>
+    </div>
+    <div class="lc-stage" id="lc-1">
+      <div class="lc-dot"></div>
+      <div class="lc-line"></div>
+      <span class="lc-label">SOP / Factory</span>
+    </div>
+    <div class="lc-stage" id="lc-2">
+      <div class="lc-dot"></div>
+      <div class="lc-line"></div>
+      <span class="lc-label">Post-SOP / Fleet</span>
+    </div>
+    <div class="lc-stage" id="lc-3">
+      <div class="lc-dot"></div>
+      <div class="lc-line" style="display:none"></div>
+      <span class="lc-label">Wrap-up</span>
     </div>
   </div>
-</div>
-
-<div class="prog-outer">
-  <div class="prog-inner">
-    <div class="prog-track"><div class="prog-fill" id="prog-fill"></div></div>
-    <div class="prog-txt" id="prog-txt">0 of 26 answered</div>
+  <div class="steps-row">
+    <div class="step-pip active" id="pip-0"></div>
+    <div class="step-pip" id="pip-1"></div>
+    <div class="step-pip" id="pip-2"></div>
+    <div class="step-pip" id="pip-3"></div>
+    <span class="steps-meta" id="steps-meta">Step <b>1</b> of 4</span>
   </div>
 </div>
 
-<div class="main">
-<form id="survey" novalidate>
+<div class="body-wrap" id="body-wrap">
 
-<!-- 01 REVIEWER -->
-<div class="sec-hdr">
-  <div class="sec-eyebrow">01</div>
-  <div class="sec-title">About you</div>
-  <div class="sec-sub">Required - so we can attribute feedback correctly when consolidating</div>
-</div>
-<div class="rev-grid">
-  <div class="fld"><label>Name <span class="req">*</span></label><input id="rn" type="text" placeholder="First Last" required><div class="err-inline" id="err-name">Please enter your name</div></div>
-  <div class="fld"><label>Role <span class="req">*</span></label>
-    <select id="rr" required>
-      <option value="">Select…</option>
-      <option>Product Manager</option>
-      <option>Voice of Customer</option>
-      <option>Sales Engineer</option>
-      <option>Customer Success</option>
-      <option>Engineering</option>
-      <option>Other</option>
-    </select>
-    <div class="err-inline" id="err-role">Please select your role</div>
-  </div>
-  <div class="fld"><label>Email</label><input id="re" type="email" placeholder="you@sonatus.com"></div>
-  <div class="fld"><label>OEM / customer accounts you know well</label><input id="ra" type="text" placeholder="e.g. OEM A, Tier 1 supplier B"></div>
-</div>
-<div class="divider"></div>
+<!-- ════════════════════════════════════
+     PAGE 1 — Ian + About you
+════════════════════════════════════ -->
+<div class="page active" id="page-0">
+  <div class="two-col">
 
-<!-- 02 IAN -->
-<div class="sec-hdr">
-  <div class="sec-eyebrow">02  ·  Persona 1 of 3</div>
-  <div class="sec-title">Ian "Loop Master" Lorenz</div>
-  <div class="sec-sub">Read the full card, then answer the questions below</div>
-</div>
-
+    <!-- LEFT: Ian card -->
+    <div class="col-left">
+      <div class="col-inner">
 <div class="pcard">
   <div class="pcard-hdr ian">
     <div class="avatar av-ian">IL</div>
@@ -283,51 +284,82 @@ textarea::placeholder{color:#c4c4d0}
     <div class="jtbd-row"><div class="jtbd-top"><span class="jtbd-num jn-ian">6</span><span class="jtbd-title">Support OEM onboarding configuration</span><span class="jtbd-badge jb-s">Secondary</span></div><div class="jtbd-lines"><div class="jtbd-line"><b>When</b> a new OEM team is setting up their first Sonatus-managed vehicle,</div><div class="jtbd-line"><b>I want to</b> respond quickly to their configuration change requests and push remote fixes without being on-site,</div><div class="jtbd-line"><b>So that</b> their initial integration runs complete without requiring a physical lab visit.</div></div></div>
   </div>
 </div>
+      </div>
+    </div>
 
+    <!-- RIGHT: About + Ian questions -->
+    <div class="col-right">
+      <div class="col-inner">
+        <div class="q-page-title">About you</div>
+        <div class="q-page-sub">So we know who said what when we pull everything together.</div>
+        <div class="rev-grid">
+          <div class="fld"><label>Name <span class="req">*</span></label><input id="rn" type="text" placeholder="First Last" required><div class="err-inline" id="err-name">Please enter your name</div></div>
+          <div class="fld"><label>Role <span class="req">*</span></label>
+            <select id="rr" required>
+              <option value="">Select...</option>
+              <option>Product Manager</option>
+              <option>Voice of Customer</option>
+              <option>Sales Engineer</option>
+              <option>Customer Success</option>
+              <option>Engineering</option>
+              <option>Other</option>
+            </select>
+            <div class="err-inline" id="err-role">Please select your role</div>
+          </div>
+          <div class="fld"><label>Email</label><input id="re" type="email" placeholder="you@sonatus.com"></div>
+          <div class="fld"><label>OEM accounts you know well</label><input id="ra" type="text" placeholder="e.g. OEM A, Tier 1 supplier B"></div>
+        </div>
 
-<div class="title-input-block">
-  <div class="title-input-hdr">
-    <div class="title-input-icon tii-ian">IL</div>
-    <div class="title-input-hdr-text">
-      <div class="title-input-hdr-title">What job titles does Ian go by at your customers?</div>
-      <div class="title-input-hdr-sub">Think about the engineers you've met or spoken to in pre-SOP programs</div>
+        <div class="divider"></div>
+
+        <div class="q-page-title">Ian "Loop Master" Lorenz</div>
+        <div class="q-page-sub">Pre-SOP Integration &amp; Validation Engineer. Read the card on the left first.</div>
+
+        <div class="title-input-block">
+          <div class="tib-hdr">
+            <div class="tib-icon tii-ian">IL</div>
+            <div><div class="tib-hdr-title">What job titles does Ian go by at your customers?</div><div class="tib-hdr-sub">Think about pre-SOP engineers you've spoken to</div></div>
+          </div>
+          <div class="tib-body">
+            <div class="tib-hint">Add as many as you can think of. One per field.</div>
+            <div id="ian-titles">
+              <div class="title-row"><input type="text" placeholder="e.g. Test Engineer" data-group="ian-titles"><button type="button" class="trm" onclick="removeTitle(this)">&#215;</button></div>
+              <div class="title-row"><input type="text" placeholder="e.g. Embedded SW Engineer" data-group="ian-titles"><button type="button" class="trm" onclick="removeTitle(this)">&#215;</button></div>
+            </div>
+            <button type="button" class="btn-add-title" onclick="addTitle('ian-titles')">+ Add another title</button>
+          </div>
+        </div>
+
+        <div class="qgrp">
+          <div class="qgrp-hdr">Overall accuracy</div>
+          <div class="qi">
+            <div class="qi-top"><span class="qnum">Q1</span><span class="qtxt">How accurate is Ian overall? Could you point to a real customer who fits? <span class="req">*</span></span></div>
+            <div class="rating"><input type="radio" name="q1" id="q1-1" value="1" data-q="Q1_Ian_accuracy"><label for="q1-1">1</label><input type="radio" name="q1" id="q1-2" value="2" data-q="Q1_Ian_accuracy"><label for="q1-2">2</label><input type="radio" name="q1" id="q1-3" value="3" data-q="Q1_Ian_accuracy"><label for="q1-3">3</label><input type="radio" name="q1" id="q1-4" value="4" data-q="Q1_Ian_accuracy"><label for="q1-4">4</label><input type="radio" name="q1" id="q1-5" value="5" data-q="Q1_Ian_accuracy"><label for="q1-5">5</label></div>
+            <div class="rating-desc"><span>Doesn't reflect any customer I know</span><span>Spot-on, I can name a real person</span></div>
+          </div>
+        </div>
+        <div class="qgrp">
+          <div class="qgrp-hdr">Role &amp; environment</div>
+          <div class="qi"><div class="qi-top"><span class="qnum">Q2</span><span class="qtxt">Is "Frankenstein prototype fleet" - mismatched firmware across Central Gateway, Zonal Controllers, and legacy ECUs - an accurate description of the pre-SOP hardware reality, or is it overstated?</span></div><textarea data-q="Q2_Ian_Frankenstein" placeholder="Accurate / overstated - and what's the reality you see from customers?"></textarea></div>
+          <div class="qi"><div class="qi-top"><span class="qnum">Q3</span><span class="qtxt">"Power State Panic" - vehicles randomly dropping to Deep Sleep or ignition cycling mid-test, risking a bricked ECU. Is this a real pain point customers have raised, or a dramatic edge case?</span></div><textarea data-q="Q3_Ian_PowerState" placeholder="Real and common / occasional / overstated - any specific customer examples?"></textarea></div>
+        </div>
+        <div class="qgrp">
+          <div class="qgrp-hdr">Jobs-to-be-done</div>
+          <div class="qi"><div class="qi-top"><span class="qnum">Q4</span><span class="qtxt">JTBD #4 (Verify physical state vs. digital claims) is listed as Primary - the argument being that safety sign-off before handing keys to a test driver is Ian's highest-stakes moment. Does that match what you hear?</span></div><textarea data-q="Q4_Ian_SignOff" placeholder="Correct priority / should be secondary / not relevant for this persona..."></textarea></div>
+          <div class="qi"><div class="qi-top"><span class="qnum">Q5</span><span class="qtxt">What primary job does Ian do with Sonatus products that is completely missing from this card?</span></div><textarea data-q="Q5_Ian_MissingJTBD" placeholder="When [situation], Ian needs to [action] so that [outcome]..."></textarea></div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="title-input-body">
-    <div class="title-hint">Add as many as you can think of. One per field.</div>
-    <div id="ian-titles">
-      <div class="title-row"><input type="text" placeholder="e.g. Test Engineer" data-group="ian-titles"><button type="button" class="title-row-remove" onclick="removeTitle(this)" title="Remove">&#215;</button></div>
-      <div class="title-row"><input type="text" placeholder="e.g. Embedded SW Engineer" data-group="ian-titles"><button type="button" class="title-row-remove" onclick="removeTitle(this)" title="Remove">&#215;</button></div>
-    </div>
-    <button type="button" class="btn-add-title" onclick="addTitle('ian-titles')">&#43; Add another title</button>
-  </div>
-</div>
-<div class="qgrp">
-  <div class="qgrp-hdr">Overall accuracy</div>
-  <div class="qi"><div class="qi-top"><span class="qnum">Q1</span><span class="qtxt">How accurate is Ian overall? Could you point to a real customer who fits? <span class="req">*</span></span></div>
-    <div class="rating"><input type="radio" name="q1" id="q1-1" value="1" data-q="Q1_Ian_accuracy"><label for="q1-1">1</label><input type="radio" name="q1" id="q1-2" value="2" data-q="Q1_Ian_accuracy"><label for="q1-2">2</label><input type="radio" name="q1" id="q1-3" value="3" data-q="Q1_Ian_accuracy"><label for="q1-3">3</label><input type="radio" name="q1" id="q1-4" value="4" data-q="Q1_Ian_accuracy"><label for="q1-4">4</label><input type="radio" name="q1" id="q1-5" value="5" data-q="Q1_Ian_accuracy"><label for="q1-5">5</label></div>
-    <div class="rating-desc"><span>Doesn't reflect any customer I know</span><span>Spot-on - I can name a real person</span></div>
-  </div>
-</div>
-<div class="qgrp">
-  <div class="qgrp-hdr">Role &amp; environment</div>
-  <div class="qi"><div class="qi-top"><span class="qnum">Q2</span><span class="qtxt">Is "Frankenstein prototype fleet" - mismatched firmware across Central Gateway, Zonal Controllers, and legacy ECUs - an accurate description of the pre-SOP hardware reality, or is it overstated?</span></div><textarea data-q="Q2_Ian_Frankenstein" placeholder="Accurate / overstated - and what's the reality you see from customers?"></textarea></div>
-  <div class="qi"><div class="qi-top"><span class="qnum">Q3</span><span class="qtxt">"Power State Panic" - vehicles randomly dropping to Deep Sleep or ignition cycling mid-test, risking a bricked ECU. Is this a real pain point customers have raised, or a dramatic edge case?</span></div><textarea data-q="Q3_Ian_PowerState" placeholder="Real and common / occasional / overstated - any specific customer examples?"></textarea></div>
-</div>
-<div class="qgrp">
-  <div class="qgrp-hdr">Jobs-to-be-done</div>
-  <div class="qi"><div class="qi-top"><span class="qnum">Q4</span><span class="qtxt">JTBD #4 (Verify physical state vs. digital claims) is listed as Primary - the argument being that safety sign-off before handing keys to a test driver is Ian's highest-stakes moment. Does that match what you hear?</span></div><textarea data-q="Q4_Ian_SignOff" placeholder="Correct priority / should be secondary / not relevant for this persona…"></textarea></div>
-  <div class="qi"><div class="qi-top"><span class="qnum">Q5</span><span class="qtxt">What primary job does Ian do with Sonatus products that is completely missing from this card?</span></div><textarea data-q="Q5_Ian_MissingJTBD" placeholder="When [situation], Ian needs to [action] so that [outcome]…"></textarea></div>
-</div>
-<div class="divider"></div>
-
-<!-- 03 SAM -->
-<div class="sec-hdr">
-  <div class="sec-eyebrow">03  ·  Persona 2 of 3</div>
-  <div class="sec-title">Sam "Cycle Time" Suzuki</div>
-  <div class="sec-sub">Read the full card, then answer the questions below</div>
 </div>
 
+<!-- ════════════════════════════════════
+     PAGE 2 — Sam
+════════════════════════════════════ -->
+<div class="page" id="page-1">
+  <div class="two-col">
+    <div class="col-left">
+      <div class="col-inner">
 <div class="pcard">
   <div class="pcard-hdr sam">
     <div class="avatar av-sam">SS</div>
@@ -367,51 +399,58 @@ textarea::placeholder{color:#c4c4d0}
     <div class="jtbd-row"><div class="jtbd-top"><span class="jtbd-num jn-sam">4</span><span class="jtbd-title">Audit software bills-of-materials</span><span class="jtbd-badge jb-s">Secondary</span></div><div class="jtbd-lines"><div class="jtbd-line"><b>When</b> a vehicle is flagged by quality control for a configuration mismatch,</div><div class="jtbd-line"><b>I want to</b> instantly verify its current software versions against the approved digital twin blueprint,</div><div class="jtbd-line"><b>So that</b> I can safely flash the correct baseline without manually plugging in a physical OBD-II diagnostic tool.</div></div></div>
   </div>
 </div>
+      </div>
+    </div>
+    <div class="col-right">
+      <div class="col-inner">
+        <div class="q-page-title">Sam "Cycle Time" Suzuki</div>
+        <div class="q-page-sub">SOP Factory-Floor Launch &amp; End-of-Line Engineer. Sam is new - no prior research baseline. Validate hard.</div>
 
+        <div class="title-input-block">
+          <div class="tib-hdr">
+            <div class="tib-icon tii-sam">SS</div>
+            <div><div class="tib-hdr-title">What job titles does Sam go by at your customers?</div><div class="tib-hdr-sub">Think about factory-floor and SOP engineers you've spoken to</div></div>
+          </div>
+          <div class="tib-body">
+            <div class="tib-hint">Add as many as you can think of. One per field.</div>
+            <div id="sam-titles">
+              <div class="title-row"><input type="text" placeholder="e.g. EOL Test Engineer" data-group="sam-titles"><button type="button" class="trm" onclick="removeTitle(this)">&#215;</button></div>
+              <div class="title-row"><input type="text" placeholder="e.g. Manufacturing Engineer" data-group="sam-titles"><button type="button" class="trm" onclick="removeTitle(this)">&#215;</button></div>
+            </div>
+            <button type="button" class="btn-add-title" onclick="addTitle('sam-titles')">+ Add another title</button>
+          </div>
+        </div>
 
-<div class="title-input-block">
-  <div class="title-input-hdr">
-    <div class="title-input-icon tii-sam">SS</div>
-    <div class="title-input-hdr-text">
-      <div class="title-input-hdr-title">What job titles does Sam go by at your customers?</div>
-      <div class="title-input-hdr-sub">Think about the engineers you've spoken to in factory or SOP programs</div>
+        <div class="qgrp">
+          <div class="qgrp-hdr">Overall accuracy</div>
+          <div class="qi">
+            <div class="qi-top"><span class="qnum">Q6</span><span class="qtxt">How accurate is Sam overall? Is this someone you've actually come across in customer conversations? <span class="req">*</span></span></div>
+            <div class="rating"><input type="radio" name="q6" id="q6-1" value="1" data-q="Q6_Sam_accuracy"><label for="q6-1">1</label><input type="radio" name="q6" id="q6-2" value="2" data-q="Q6_Sam_accuracy"><label for="q6-2">2</label><input type="radio" name="q6" id="q6-3" value="3" data-q="Q6_Sam_accuracy"><label for="q6-3">3</label><input type="radio" name="q6" id="q6-4" value="4" data-q="Q6_Sam_accuracy"><label for="q6-4">4</label><input type="radio" name="q6" id="q6-5" value="5" data-q="Q6_Sam_accuracy"><label for="q6-5">5</label></div>
+            <div class="rating-desc"><span>Doesn't reflect any customer I know</span><span>Spot-on, I can name a real person</span></div>
+          </div>
+        </div>
+        <div class="qgrp">
+          <div class="qgrp-hdr">Role &amp; environment</div>
+          <div class="qi"><div class="qi-top"><span class="qnum">Q7</span><span class="qtxt">What is the realistic takt time at your key OEM customers? And what actually happens - organizationally - when a vehicle misses its slot?</span></div><textarea data-q="Q7_Sam_TaktTime" placeholder="Takt time at customer X: ~__ sec. What happens when a vehicle misses: ..."></textarea></div>
+          <div class="qi"><div class="qi-top"><span class="qnum">Q8</span><span class="qtxt">"High-Stakes Compliance" - an ECU with an unverified software signature cannot legally leave the factory. Is this a current, active pain point or more of a future regulatory concern?</span></div><textarea data-q="Q8_Sam_Compliance" placeholder="Current pain today / aspirational / future regulation - any specific examples?"></textarea></div>
+        </div>
+        <div class="qgrp">
+          <div class="qgrp-hdr">Jobs-to-be-done</div>
+          <div class="qi"><div class="qi-top"><span class="qnum">Q9</span><span class="qtxt">JTBD #3 (Recover a failed EOL vehicle without stopping the line) was added as a new Primary job. Does this match what Sam actually does when a diagnostic fails?</span></div><textarea data-q="Q9_Sam_FailureRecovery" placeholder="Accurate / partially right / wrong - describe what actually happens in practice..."></textarea></div>
+          <div class="qi"><div class="qi-top"><span class="qnum">Q10</span><span class="qtxt">What critical job does Sam do that is still missing from this card?</span></div><textarea data-q="Q10_Sam_MissingJTBD" placeholder="When [situation], Sam needs to [action] so that [outcome]..."></textarea></div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="title-input-body">
-    <div class="title-hint">Add as many as you can think of. One per field.</div>
-    <div id="sam-titles">
-      <div class="title-row"><input type="text" placeholder="e.g. EOL Test Engineer" data-group="sam-titles"><button type="button" class="title-row-remove" onclick="removeTitle(this)" title="Remove">&#215;</button></div>
-      <div class="title-row"><input type="text" placeholder="e.g. Manufacturing Engineer" data-group="sam-titles"><button type="button" class="title-row-remove" onclick="removeTitle(this)" title="Remove">&#215;</button></div>
-    </div>
-    <button type="button" class="btn-add-title" onclick="addTitle('sam-titles')">&#43; Add another title</button>
-  </div>
-</div>
-<div class="qgrp">
-  <div class="qgrp-hdr">Overall accuracy</div>
-  <div class="qi"><div class="qi-top"><span class="qnum">Q6</span><span class="qtxt">How accurate is Sam overall? Is this someone you've actually come across in customer conversations? <span class="req">*</span></span></div>
-    <div class="rating"><input type="radio" name="q6" id="q6-1" value="1" data-q="Q6_Sam_accuracy"><label for="q6-1">1</label><input type="radio" name="q6" id="q6-2" value="2" data-q="Q6_Sam_accuracy"><label for="q6-2">2</label><input type="radio" name="q6" id="q6-3" value="3" data-q="Q6_Sam_accuracy"><label for="q6-3">3</label><input type="radio" name="q6" id="q6-4" value="4" data-q="Q6_Sam_accuracy"><label for="q6-4">4</label><input type="radio" name="q6" id="q6-5" value="5" data-q="Q6_Sam_accuracy"><label for="q6-5">5</label></div>
-    <div class="rating-desc"><span>Doesn't reflect any customer I know</span><span>Spot-on - I can name a real person</span></div>
-  </div>
-</div>
-<div class="qgrp">
-  <div class="qgrp-hdr">Role &amp; environment</div>
-  <div class="qi"><div class="qi-top"><span class="qnum">Q7</span><span class="qtxt">What is the realistic takt time at your key OEM customers? And what actually happens - organizationally - when a vehicle misses its slot?</span></div><textarea data-q="Q7_Sam_TaktTime" placeholder="Takt time at customer X: ~__ sec. What happens when a vehicle misses: …"></textarea></div>
-  <div class="qi"><div class="qi-top"><span class="qnum">Q8</span><span class="qtxt">"High-Stakes Compliance" - an ECU with an unverified software signature cannot legally leave the factory. Is this a current, active pain point or more of a future regulatory concern?</span></div><textarea data-q="Q8_Sam_Compliance" placeholder="Current pain today / aspirational / future regulation - any specific examples?"></textarea></div>
-</div>
-<div class="qgrp">
-  <div class="qgrp-hdr">Jobs-to-be-done</div>
-  <div class="qi"><div class="qi-top"><span class="qnum">Q9</span><span class="qtxt">JTBD #3 (Recover a failed EOL vehicle without stopping the line) was added based on a gap in the original card. Does this match what Sam actually does when a diagnostic fails?</span></div><textarea data-q="Q9_Sam_FailureRecovery" placeholder="Accurate / partially right / wrong - describe what actually happens in practice…"></textarea></div>
-  <div class="qi"><div class="qi-top"><span class="qnum">Q10</span><span class="qtxt">What critical job does Sam do that is still missing from this card?</span></div><textarea data-q="Q10_Sam_MissingJTBD" placeholder="When [situation], Sam needs to [action] so that [outcome]…"></textarea></div>
-</div>
-<div class="divider"></div>
-
-<!-- 04 FIONA -->
-<div class="sec-hdr">
-  <div class="sec-eyebrow">04  ·  Persona 3 of 3</div>
-  <div class="sec-title">Fiona "Fleet-Wide" Foster</div>
-  <div class="sec-sub">Read the full card, then answer the questions below</div>
 </div>
 
+<!-- ════════════════════════════════════
+     PAGE 3 — Fiona
+════════════════════════════════════ -->
+<div class="page" id="page-2">
+  <div class="two-col">
+    <div class="col-left">
+      <div class="col-inner">
 <div class="pcard">
   <div class="pcard-hdr fiona">
     <div class="avatar av-fiona">FF</div>
@@ -451,113 +490,133 @@ textarea::placeholder{color:#c4c4d0}
     <div class="jtbd-row"><div class="jtbd-top"><span class="jtbd-num jn-fiona">4</span><span class="jtbd-title">Report fleet health to leadership and safety teams</span><span class="jtbd-badge jb-s">Secondary</span></div><div class="jtbd-lines"><div class="jtbd-line"><b>When</b> leadership or a safety review board needs a status update on fleet software health,</div><div class="jtbd-line"><b>I want to</b> generate a clear, exportable summary of fleet-wide update compliance, open anomalies, and recent deployment outcomes,</div><div class="jtbd-line"><b>So that</b> I can communicate risk and progress without manually assembling data from multiple dashboards.</div></div></div>
   </div>
 </div>
+      </div>
+    </div>
+    <div class="col-right">
+      <div class="col-inner">
+        <div class="q-page-title">Fiona "Fleet-Wide" Foster</div>
+        <div class="q-page-sub">Post-SOP Fleet Performance &amp; Connected Vehicle Reliability Engineer. Read the card on the left first.</div>
 
+        <div class="title-input-block">
+          <div class="tib-hdr">
+            <div class="tib-icon tii-fiona">FF</div>
+            <div><div class="tib-hdr-title">What job titles does Fiona go by at your customers?</div><div class="tib-hdr-sub">Think about post-SOP and production fleet engineers you've spoken to</div></div>
+          </div>
+          <div class="tib-body">
+            <div class="tib-hint">Add as many as you can think of. One per field.</div>
+            <div id="fiona-titles">
+              <div class="title-row"><input type="text" placeholder="e.g. Fleet Operations Engineer" data-group="fiona-titles"><button type="button" class="trm" onclick="removeTitle(this)">&#215;</button></div>
+              <div class="title-row"><input type="text" placeholder="e.g. Connected Vehicle Engineer" data-group="fiona-titles"><button type="button" class="trm" onclick="removeTitle(this)">&#215;</button></div>
+            </div>
+            <button type="button" class="btn-add-title" onclick="addTitle('fiona-titles')">+ Add another title</button>
+          </div>
+        </div>
 
-<div class="title-input-block">
-  <div class="title-input-hdr">
-    <div class="title-input-icon tii-fiona">FF</div>
-    <div class="title-input-hdr-text">
-      <div class="title-input-hdr-title">What job titles does Fiona go by at your customers?</div>
-      <div class="title-input-hdr-sub">Think about the engineers you've spoken to who manage live, production fleets</div>
+        <div class="qgrp">
+          <div class="qgrp-hdr">Overall accuracy</div>
+          <div class="qi">
+            <div class="qi-top"><span class="qnum">Q11</span><span class="qtxt">How accurate is Fiona overall? Does she match the post-SOP fleet engineers you talk to? <span class="req">*</span></span></div>
+            <div class="rating"><input type="radio" name="q11" id="q11-1" value="1" data-q="Q11_Fiona_accuracy"><label for="q11-1">1</label><input type="radio" name="q11" id="q11-2" value="2" data-q="Q11_Fiona_accuracy"><label for="q11-2">2</label><input type="radio" name="q11" id="q11-3" value="3" data-q="Q11_Fiona_accuracy"><label for="q11-3">3</label><input type="radio" name="q11" id="q11-4" value="4" data-q="Q11_Fiona_accuracy"><label for="q11-4">4</label><input type="radio" name="q11" id="q11-5" value="5" data-q="Q11_Fiona_accuracy"><label for="q11-5">5</label></div>
+            <div class="rating-desc"><span>Doesn't reflect any customer I know</span><span>Spot-on, I can name a real person</span></div>
+          </div>
+        </div>
+        <div class="qgrp">
+          <div class="qgrp-hdr">Scale &amp; context</div>
+          <div class="qi"><div class="qi-top"><span class="qnum">Q12</span><span class="qtxt">What is the realistic fleet size for your current Fiona-type customers? Give a range that reflects today's reality, not a 3-year aspiration.</span></div><textarea data-q="Q12_Fiona_FleetScale" placeholder="Current customer range: __ to __ vehicles. Context: ..."></textarea></div>
+          <div class="qi"><div class="qi-top"><span class="qnum">Q13</span><span class="qtxt">"Cellular Bill Pressures" - cost-per-vehicle data transfer as a real financial control point. Is this a live concern customers are managing today, or a future-state risk?</span></div><textarea data-q="Q13_Fiona_CellularCost" placeholder="Real pain today / future concern - any specific numbers or examples?"></textarea></div>
+          <div class="qi"><div class="qi-top"><span class="qnum">Q14</span><span class="qtxt">"The Scary Deployments" frames a bad OTA push as a potential recall trigger and brand liability event. Is that fear level accurate for your Fiona-type customers, or overstated?</span></div><textarea data-q="Q14_Fiona_ScaryDeploy" placeholder="Accurate fear level / overstated / understated - describe the real risk level..."></textarea></div>
+        </div>
+        <div class="qgrp">
+          <div class="qgrp-hdr">Jobs-to-be-done</div>
+          <div class="qi"><div class="qi-top"><span class="qnum">Q15</span><span class="qtxt">JTBD #2 describes a staged rollout (1% to 5% to 25% to 100%) with automated rollback. Is this the actual deployment pattern your customers use, or an idealized version?</span></div><textarea data-q="Q15_Fiona_StagedRollout" placeholder="Real pattern / idealized - describe what actually happens in practice..."></textarea></div>
+          <div class="qi"><div class="qi-top"><span class="qnum">Q16</span><span class="qtxt">Fiona is framed as an operator who acts on data. Is there a separate investigative/analytical job missing - someone who manually digs into time-series telemetry to write incident reports? Or is that Fiona too?</span></div><textarea data-q="Q16_Fiona_AnalystGap" placeholder="Same person does both / that's a distinct persona - describe the analytical job if separate..."></textarea></div>
+          <div class="qi"><div class="qi-top"><span class="qnum">Q17</span><span class="qtxt">JTBD #4 (Report fleet health to leadership and safety teams) was added as a new secondary job. Is this real and important for Fiona - or out of scope?</span></div><textarea data-q="Q17_Fiona_ReportingJTBD" placeholder="Important and real / out of scope - describe how this works at your customers..."></textarea></div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="title-input-body">
-    <div class="title-hint">Add as many as you can think of. One per field.</div>
-    <div id="fiona-titles">
-      <div class="title-row"><input type="text" placeholder="e.g. Fleet Operations Engineer" data-group="fiona-titles"><button type="button" class="title-row-remove" onclick="removeTitle(this)" title="Remove">&#215;</button></div>
-      <div class="title-row"><input type="text" placeholder="e.g. Connected Vehicle Engineer" data-group="fiona-titles"><button type="button" class="title-row-remove" onclick="removeTitle(this)" title="Remove">&#215;</button></div>
+</div>
+
+<!-- ════════════════════════════════════
+     PAGE 4 — Closing
+════════════════════════════════════ -->
+<div class="page" id="page-3">
+  <div class="one-col">
+    <div class="one-col-inner">
+      <div class="q-page-title">The full picture</div>
+      <div class="q-page-sub" style="margin-bottom:1.5rem">Now that you've seen all three - answer these with the full set in mind. Then submit when you're done.</div>
+
+      <div class="qgrp">
+        <div class="qgrp-hdr">Distinctiveness &amp; coverage</div>
+        <div class="qi"><div class="qi-top"><span class="qnum">Q18</span><span class="qtxt">Which two of the three personas feel most similar to each other - where do their jobs and concerns overlap enough to cause confusion?</span></div><textarea data-q="Q18_Overlap" placeholder="The two that overlap most: [names]. What overlaps: ..."></textarea></div>
+        <div class="qi"><div class="qi-top"><span class="qnum">Q19</span><span class="qtxt">Is there a persona type you regularly come across in customer conversations that is missing from this set? Tell us their role, what they use Sonatus for, and what their biggest frustration is.</span></div><textarea data-q="Q19_MissingPersona" placeholder="Role: [title]. They use Sonatus to: [job]. Biggest pain: [pain]..."></textarea></div>
+      </div>
+      <div class="qgrp">
+        <div class="qgrp-hdr">Business impact</div>
+        <div class="qi"><div class="qi-top"><span class="qnum">Q20</span><span class="qtxt">Which persona creates the most friction in your sales or renewal conversations - and what specifically is the sticking point?</span></div><textarea data-q="Q20_SalesFriction" placeholder="Persona: [name]. Sticking point: ..."></textarea></div>
+        <div class="qi"><div class="qi-top"><span class="qnum">Q21</span><span class="qtxt">Which persona is most underrepresented in current Sonatus product decisions - where does it feel like we're designing for a different user than who actually suffers?</span></div><textarea data-q="Q21_Underrepresented" placeholder="Most underrepresented: [name]. Evidence: ..."></textarea></div>
+        <div class="qi"><div class="qi-top"><span class="qnum">Q22</span><span class="qtxt">Across all three personas, which one job - if we made it noticeably easier in Command Center - would make the biggest difference to a customer you work with right now?</span></div><textarea data-q="Q22_HighestImpactJTBD" style="min-height:88px" placeholder="Persona: [name]. Job: [title]. Why it matters now: ..."></textarea></div>
+      </div>
+      <div class="qgrp">
+        <div class="qgrp-hdr">Before we share these externally</div>
+        <div class="qi"><div class="qi-top"><span class="qnum">Q23</span><span class="qtxt">Is there anything here you'd be uncomfortable showing to a customer? Be specific - persona, section, what's wrong and why.</span></div><textarea data-q="Q23_EmbarrassmentCheck" placeholder="Persona: [name]. Section: [section]. Problem: [what's wrong and why]..."></textarea></div>
+        <div class="qi"><div class="qi-top"><span class="qnum">Q24</span><span class="qtxt">If you could change one thing before we show these to a customer, what would it be?</span></div><textarea data-q="Q24_MostImportantChange" placeholder="Change: [what]. Reason: [why it matters]..."></textarea></div>
+        <div class="qi">
+          <div class="qi-top"><span class="qnum">Q25</span><span class="qtxt">Taken together, how well do these three personas cover the full range of people who use Command Center today? <span class="req">*</span></span></div>
+          <div class="rating"><input type="radio" name="q25" id="q25-1" value="1" data-q="Q25_CoverageConfidence"><label for="q25-1">1</label><input type="radio" name="q25" id="q25-2" value="2" data-q="Q25_CoverageConfidence"><label for="q25-2">2</label><input type="radio" name="q25" id="q25-3" value="3" data-q="Q25_CoverageConfidence"><label for="q25-3">3</label><input type="radio" name="q25" id="q25-4" value="4" data-q="Q25_CoverageConfidence"><label for="q25-4">4</label><input type="radio" name="q25" id="q25-5" value="5" data-q="Q25_CoverageConfidence"><label for="q25-5">5</label></div>
+          <div class="rating-desc"><span>Missing major user types</span><span>These cover everyone we sell to</span></div>
+        </div>
+        <div class="qi"><div class="qi-top"><span class="qnum">Q26</span><span class="qtxt">Anything else worth knowing? A customer story, a nuance, something that doesn't quite fit?</span></div><textarea data-q="Q26_OpenComments" placeholder="Any additional context, edge cases, or customer stories..."></textarea></div>
+      </div>
     </div>
-    <button type="button" class="btn-add-title" onclick="addTitle('fiona-titles')">&#43; Add another title</button>
   </div>
 </div>
-<div class="qgrp">
-  <div class="qgrp-hdr">Overall accuracy</div>
-  <div class="qi"><div class="qi-top"><span class="qnum">Q11</span><span class="qtxt">How accurate is Fiona overall? Does she match the post-SOP fleet engineers you talk to? <span class="req">*</span></span></div>
-    <div class="rating"><input type="radio" name="q11" id="q11-1" value="1" data-q="Q11_Fiona_accuracy"><label for="q11-1">1</label><input type="radio" name="q11" id="q11-2" value="2" data-q="Q11_Fiona_accuracy"><label for="q11-2">2</label><input type="radio" name="q11" id="q11-3" value="3" data-q="Q11_Fiona_accuracy"><label for="q11-3">3</label><input type="radio" name="q11" id="q11-4" value="4" data-q="Q11_Fiona_accuracy"><label for="q11-4">4</label><input type="radio" name="q11" id="q11-5" value="5" data-q="Q11_Fiona_accuracy"><label for="q11-5">5</label></div>
-    <div class="rating-desc"><span>Doesn't reflect any customer I know</span><span>Spot-on - I can name a real person</span></div>
-  </div>
-</div>
-<div class="qgrp">
-  <div class="qgrp-hdr">Scale &amp; context</div>
-  <div class="qi"><div class="qi-top"><span class="qnum">Q12</span><span class="qtxt">What is the realistic fleet size for your current Fiona-type customers? Give a range that reflects today's reality, not a 3-year aspiration.</span></div><textarea data-q="Q12_Fiona_FleetScale" placeholder="Current customer range: __ to __ vehicles. Context: …"></textarea></div>
-  <div class="qi"><div class="qi-top"><span class="qnum">Q13</span><span class="qtxt">"Cellular Bill Pressures" - cost-per-vehicle data transfer as a real financial control point. Is this a live concern customers are managing today, or a future-state risk?</span></div><textarea data-q="Q13_Fiona_CellularCost" placeholder="Real pain today / future concern - any specific numbers or examples?"></textarea></div>
-  <div class="qi"><div class="qi-top"><span class="qnum">Q14</span><span class="qtxt">"The Scary Deployments" frames a bad OTA push as a potential recall trigger and brand liability event. Is that fear level accurate for your Fiona-type customers, or overstated?</span></div><textarea data-q="Q14_Fiona_ScaryDeploy" placeholder="Accurate fear level / overstated / understated - describe the real risk level…"></textarea></div>
-</div>
-<div class="qgrp">
-  <div class="qgrp-hdr">Jobs-to-be-done</div>
-  <div class="qi"><div class="qi-top"><span class="qnum">Q15</span><span class="qtxt">JTBD #2 describes a staged rollout (1%→5%→25%→100%) with automated rollback. Is this the actual deployment pattern your customers use - or an idealized version?</span></div><textarea data-q="Q15_Fiona_StagedRollout" placeholder="Real pattern / idealized - describe what actually happens in practice…"></textarea></div>
-  <div class="qi"><div class="qi-top"><span class="qnum">Q16</span><span class="qtxt">Fiona is framed as an operator who acts on data. Is there a separate investigative/analytical job missing - someone who manually digs into time-series telemetry to write incident reports or build cohort comparisons? Or is that Fiona too?</span></div><textarea data-q="Q16_Fiona_AnalystGap" placeholder="Same person does both / that's a distinct persona - describe the analytical job if separate…"></textarea></div>
-  <div class="qi"><div class="qi-top"><span class="qnum">Q17</span><span class="qtxt">JTBD #4 (Report fleet health to leadership and safety teams) was added as a new secondary job. Is this real and important for Fiona - or out of scope?</span></div><textarea data-q="Q17_Fiona_ReportingJTBD" placeholder="Important and real / out of scope - describe how this works at your customers…"></textarea></div>
-</div>
-<div class="divider"></div>
-
-<!-- 05 CROSS-PERSONA -->
-<div class="sec-hdr">
-  <div class="sec-eyebrow">05  ·  Cross-persona</div>
-  <div class="sec-title">The full picture</div>
-  <div class="sec-sub">Now that you've seen all three, answer these with the full picture in mind</div>
-</div>
-<div class="qgrp">
-  <div class="qgrp-hdr">Distinctiveness &amp; coverage</div>
-  <div class="qi"><div class="qi-top"><span class="qnum">Q18</span><span class="qtxt">Which two of the three personas feel most similar to each other - where do their jobs and concerns overlap enough to cause confusion?</span></div><textarea data-q="Q18_Overlap" placeholder="The two that overlap most: [names]. What overlaps: …"></textarea></div>
-  <div class="qi"><div class="qi-top"><span class="qnum">Q19</span><span class="qtxt">Is there a persona type you regularly encounter in customer conversations that is missing from this set? Tell us their role, what they use Sonatus for, and what their biggest frustration is.</span></div><textarea data-q="Q19_MissingPersona" placeholder="Role: [title]. They use Sonatus to: [job]. Biggest pain: [pain]…"></textarea></div>
-</div>
-<div class="qgrp">
-  <div class="qgrp-hdr">Business impact</div>
-  <div class="qi"><div class="qi-top"><span class="qnum">Q20</span><span class="qtxt">Which persona creates the most friction in your sales or renewal conversations - and what specifically is the sticking point?</span></div><textarea data-q="Q20_SalesFriction" placeholder="Persona: [name]. Sticking point: …"></textarea></div>
-  <div class="qi"><div class="qi-top"><span class="qnum">Q21</span><span class="qtxt">Which persona is most underrepresented in current Sonatus product decisions - where does it feel like we're designing for a different user than who actually suffers?</span></div><textarea data-q="Q21_Underrepresented" placeholder="Most underrepresented: [name]. Evidence: …"></textarea></div>
-  <div class="qi"><div class="qi-top"><span class="qnum">Q22</span><span class="qtxt">Across all three personas, which one job - if we made it noticeably easier in Command Center - would make the biggest difference to a customer you work with right now?</span></div><textarea data-q="Q22_HighestImpactJTBD" placeholder="Persona: [name]. JTBD: [job title]. Why it matters now: …" style="min-height:90px"></textarea></div>
-</div>
-<div class="divider"></div>
-
-<!-- 06 WRAP-UP -->
-<div class="sec-hdr">
-  <div class="sec-eyebrow">06  ·  Final checks</div>
-  <div class="sec-title">Before we share these externally</div>
-  <div class="sec-sub">Three quick ones before we wrap up</div>
-</div>
-<div class="qgrp">
-  <div class="qi"><div class="qi-top"><span class="qnum">Q23</span><span class="qtxt">Is there anything here you'd be uncomfortable showing to a customer? Be specific - persona, section, what's wrong and why.</span></div><textarea data-q="Q23_EmbarrassmentCheck" placeholder="Persona: [name]. Section: [section]. Problem: [what's wrong and why]…"></textarea></div>
-  <div class="qi"><div class="qi-top"><span class="qnum">Q24</span><span class="qtxt">If you could change one thing before we show these to a customer, what would it be?</span></div><textarea data-q="Q24_MostImportantChange" placeholder="Change: [what]. Reason: [why it matters]…"></textarea></div>
-  <div class="qi"><div class="qi-top"><span class="qnum">Q25</span><span class="qtxt">Taken together, how well do these three personas cover the full range of people who use Command Center today? <span class="req">*</span></span></div>
-    <div class="rating"><input type="radio" name="q25" id="q25-1" value="1" data-q="Q25_CoverageConfidence"><label for="q25-1">1</label><input type="radio" name="q25" id="q25-2" value="2" data-q="Q25_CoverageConfidence"><label for="q25-2">2</label><input type="radio" name="q25" id="q25-3" value="3" data-q="Q25_CoverageConfidence"><label for="q25-3">3</label><input type="radio" name="q25" id="q25-4" value="4" data-q="Q25_CoverageConfidence"><label for="q25-4">4</label><input type="radio" name="q25" id="q25-5" value="5" data-q="Q25_CoverageConfidence"><label for="q25-5">5</label></div>
-    <div class="rating-desc"><span>Missing major user types</span><span>These cover everyone we sell to</span></div>
-  </div>
-  <div class="qi"><div class="qi-top"><span class="qnum">Q26</span><span class="qtxt">Anything else worth knowing? A customer story, a nuance, something that doesn't quite fit?</span></div><textarea data-q="Q26_OpenComments" placeholder="Any additional context, edge cases, or customer stories…"></textarea></div>
-</div>
-
-<div class="sub-zone">
-  <div class="sub-copy"><strong>Your responses go straight into a shared spreadsheet.</strong><br>Everyone writes to the same place, so there's nothing to merge afterward.</div>
-  <button type="submit" class="btn-submit" id="sub-btn">Submit my responses</button>
-</div>
-
-</form>
 
 <!-- SUBMITTING -->
-<div id="submitting">
+<div id="submitting-screen" style="display:none;flex:1;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:4rem">
   <div class="spinner"></div>
-  <div class="state-title" style="font-size:18px;font-weight:500;color:var(--ink3)">Saving your responses…</div>
+  <div style="font-size:16px;font-weight:500;color:var(--ink3)">Saving your responses...</div>
 </div>
 
 <!-- SUCCESS -->
-<div id="done-screen">
-  <div class="state-icon icon-success" style="font-size:26px">✓</div>
+<div id="done-screen" style="display:none;flex:1;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:4rem">
+  <div class="state-icon icon-success">✓</div>
   <div class="state-title">Responses saved</div>
-  <p class="state-body">Your responses are in. Thanks for taking the time - this genuinely helps us build the right thing.</p>
+  <p class="state-body">Your feedback has been recorded. Thanks for taking the time - this genuinely helps us build the right thing.</p>
 </div>
 
 <!-- ERROR -->
-<div id="error-screen">
-  <div class="state-icon icon-error" style="font-size:26px">!</div>
+<div id="error-screen" style="display:none;flex:1;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:4rem">
+  <div class="state-icon icon-error">!</div>
   <div class="state-title">Submission failed</div>
   <p class="state-body" id="error-msg">Something went wrong. Try submitting again, or drop Rubina a message directly.</p>
-  <button class="btn-outline" onclick="showForm()">Try again</button>
+  <button class="btn-outline" onclick="showPage(3)">Try again</button>
 </div>
 
+</div><!-- /body-wrap -->
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav" id="bottom-nav">
+  <div class="nav-left">
+    <button class="btn-prev" id="btn-prev" onclick="navigate(-1)" disabled>
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 11L5 7L9 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Previous
+    </button>
+    <span class="nav-progress-txt" id="nav-progress">Page 1 of 4</span>
+  </div>
+  <div class="nav-right">
+    <button class="btn-next" id="btn-next" onclick="navigate(1)">
+      Next
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3L9 7L5 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <button class="btn-submit-main" id="btn-submit" style="display:none" onclick="submitSurvey()">Submit my responses</button>
+  </div>
 </div>
 
 <script>
 const ENDPOINT = "https://script.google.com/a/macros/sonatus.com/s/AKfycbxZgjNosbFtndcnPRl7GszBbzSlXU962FkuOs78gLjFujCN2CrIMy15syyhPgG13IL6/exec";
+const TOTAL_PAGES = 4;
+let currentPage = 0;
 
 const QS = [
   'Q1_Ian_accuracy','Q2_Ian_Frankenstein','Q3_Ian_PowerState','Q4_Ian_SignOff','Q5_Ian_MissingJTBD',
@@ -567,22 +626,20 @@ const QS = [
   'Q18_Overlap','Q19_MissingPersona','Q20_SalesFriction','Q21_Underrepresented','Q22_HighestImpactJTBD',
   'Q23_EmbarrassmentCheck','Q24_MostImportantChange','Q25_CoverageConfidence','Q26_OpenComments'
 ];
-
 const HEADERS = [
   'Timestamp','Name','Role','Email','Accounts',
-  'Ian - Real job titles in your org',
-  'Q1 Ian accuracy (1-5)','Q2 Ian Frankenstein fleet','Q3 Ian Power State Panic',
+  'Ian - Real job titles','Q1 Ian accuracy (1-5)','Q2 Ian Frankenstein fleet','Q3 Ian Power State Panic',
   'Q4 Ian safety sign-off priority','Q5 Ian missing JTBD',
-  'Sam - Real job titles in your org',
-  'Q6 Sam accuracy (1-5)','Q7 Sam takt time reality','Q8 Sam compliance pain',
+  'Sam - Real job titles','Q6 Sam accuracy (1-5)','Q7 Sam takt time reality','Q8 Sam compliance pain',
   'Q9 Sam EOL failure recovery','Q10 Sam missing JTBD',
-  'Fiona - Real job titles in your org',
-  'Q11 Fiona accuracy (1-5)','Q12 Fiona fleet scale','Q13 Fiona cellular cost',
+  'Fiona - Real job titles','Q11 Fiona accuracy (1-5)','Q12 Fiona fleet scale','Q13 Fiona cellular cost',
   'Q14 Fiona scary deployments','Q15 Fiona staged rollout','Q16 Fiona analyst gap','Q17 Fiona reporting JTBD',
-  'Q18 Persona overlap','Q19 Missing persona',
-  'Q20 Sales friction persona','Q21 Underrepresented persona','Q22 Highest impact JTBD',
-  'Q23 Embarrassment check','Q24 Most important change','Q25 Coverage confidence (1-5)','Q26 Open comments'
+  'Q18 Persona overlap','Q19 Missing persona','Q20 Sales friction','Q21 Underrepresented',
+  'Q22 Highest impact JTBD','Q23 Embarrassment check','Q24 Most important change',
+  'Q25 Coverage confidence (1-5)','Q26 Open comments'
 ];
+
+const LC_LABELS = ['Pre-SOP','SOP / Factory','Post-SOP / Fleet','Wrap-up'];
 
 function getV(q) {
   const ta = document.querySelector('textarea[data-q="' + q + '"]');
@@ -591,131 +648,91 @@ function getV(q) {
   return r ? r.value : '';
 }
 
-function upd() {
-  let n = 0;
-  QS.forEach(q => { if (getV(q)) n++; });
-  // count title groups as answered if at least one title entered
-  ['ian-titles','sam-titles','fiona-titles'].forEach(g => {
-    if (getTitles(g)) n++;
-  });
-  const total = QS.length + 3;
-  const pct = Math.round(n / total * 100);
-  document.getElementById('prog-fill').style.width = pct + '%';
-  document.getElementById('prog-txt').textContent = n + ' of ' + total + ' answered';
+function getTitles(groupId) {
+  return Array.from(document.querySelectorAll('#' + groupId + ' input'))
+    .map(i => i.value.trim()).filter(v => v).join(' | ');
 }
 
-document.querySelectorAll('textarea, input[type="radio"]').forEach(el => {
-  el.addEventListener('change', upd);
-  el.addEventListener('input', upd);
-});
-
-function showForm() {
-  document.getElementById('survey').style.display = 'block';
-  document.getElementById('submitting').style.display = 'none';
-  document.getElementById('done-screen').style.display = 'none';
-  document.getElementById('error-screen').style.display = 'none';
-  document.getElementById('sub-btn').disabled = false;
-}
-
-// JSONP submission - the only reliable way to post to Apps Script from static HTML
-// Apps Script must return ContentService with callback parameter support
-function submitViaJsonp(payload) {
-  return new Promise((resolve, reject) => {
-    const cbName = 'gsCallback_' + Date.now();
-    const timeout = setTimeout(() => {
-      delete window[cbName];
-      const tag = document.getElementById('jsonp-tag');
-      if (tag) tag.remove();
-      reject(new Error('timeout'));
-    }, 15000);
-
-    window[cbName] = function(response) {
-      clearTimeout(timeout);
-      delete window[cbName];
-      const tag = document.getElementById('jsonp-tag');
-      if (tag) tag.remove();
-      if (response && response.result === 'success') {
-        resolve(response);
-      } else {
-        reject(new Error(response ? response.error : 'Unknown error'));
-      }
-    };
-
-    // Encode payload as URL param for JSONP GET request
-    const encoded = encodeURIComponent(JSON.stringify(payload));
-    const url = ENDPOINT + '?callback=' + cbName + '&data=' + encoded;
-
-    const script = document.createElement('script');
-    script.id = 'jsonp-tag';
-    script.src = url;
-    script.onerror = () => {
-      clearTimeout(timeout);
-      delete window[cbName];
-      reject(new Error('script load error'));
-    };
-    document.head.appendChild(script);
-  });
-}
-
-
-function addTitle(groupId) {
-  const container = document.getElementById(groupId);
+function addTitle(gid) {
+  const c = document.getElementById(gid);
   const row = document.createElement('div');
   row.className = 'title-row';
-  row.innerHTML = '<input type="text" placeholder="Add job title..." data-group="' + groupId + '"><button type="button" class="title-row-remove" onclick="removeTitle(this)" title="Remove">&#215;</button>';
-  container.appendChild(row);
+  row.innerHTML = '<input type="text" placeholder="Add job title..." data-group="' + gid + '"><button type="button" class="trm" onclick="removeTitle(this)">&#215;</button>';
+  c.appendChild(row);
   row.querySelector('input').focus();
-  upd();
 }
 
 function removeTitle(btn) {
-  const container = btn.closest('[id$="-titles"]');
-  if (container.querySelectorAll('.title-row').length > 1) {
+  const c = btn.closest('[id$="-titles"]');
+  if (c.querySelectorAll('.title-row').length > 1) {
     btn.closest('.title-row').remove();
   } else {
     btn.closest('.title-row').querySelector('input').value = '';
   }
-  upd();
 }
 
-function getTitles(groupId) {
-  const inputs = document.querySelectorAll('#' + groupId + ' input');
-  return Array.from(inputs)
-    .map(i => i.value.trim())
-    .filter(v => v)
-    .join(' | ');
+function updateStepper(p) {
+  for (let i = 0; i < TOTAL_PAGES; i++) {
+    const pip = document.getElementById('pip-' + i);
+    const lc = document.getElementById('lc-' + i);
+    pip.className = 'step-pip' + (i === p ? ' active' : i < p ? ' done' : '');
+    if (lc) lc.className = 'lc-stage' + (i === p ? ' active' : i < p ? ' done' : '');
+  }
+  const meta = document.getElementById('steps-meta');
+  meta.innerHTML = 'Step <b>' + (p + 1) + '</b> of ' + TOTAL_PAGES;
+  document.getElementById('nav-progress').textContent = 'Page ' + (p + 1) + ' of ' + TOTAL_PAGES;
 }
 
-document.getElementById('survey').addEventListener('submit', async function(e) {
-  e.preventDefault();
+function showPage(p) {
+  document.querySelectorAll('.page').forEach((el, i) => {
+    el.classList.toggle('active', i === p);
+  });
+  ['submitting-screen','done-screen','error-screen'].forEach(id => {
+    document.getElementById(id).style.display = 'none';
+  });
+  document.getElementById('bottom-nav').style.display = 'flex';
+  document.getElementById('body-wrap').style.display = 'flex';
 
-  const name = document.getElementById('rn').value.trim();
-  const role = document.getElementById('rr').value;
+  const isLast = p === TOTAL_PAGES - 1;
+  document.getElementById('btn-next').style.display = isLast ? 'none' : 'flex';
+  document.getElementById('btn-submit').style.display = isLast ? 'block' : 'none';
+  document.getElementById('btn-prev').disabled = p === 0;
 
-  document.getElementById('err-name').style.display = 'none';
-  document.getElementById('err-role').style.display = 'none';
-  document.getElementById('rn').style.borderColor = '';
-  document.getElementById('rr').style.borderColor = '';
+  updateStepper(p);
+  // scroll both cols to top
+  document.querySelectorAll('.col-left,.col-right,.one-col').forEach(c => c.scrollTop = 0);
+  currentPage = p;
+}
 
-  let valid = true;
-  if (!name) {
-    document.getElementById('rn').style.borderColor = '#dc2626';
-    document.getElementById('err-name').style.display = 'block';
-    valid = false;
+function navigate(dir) {
+  if (dir === 1 && currentPage === 0) {
+    // validate about you
+    const name = document.getElementById('rn').value.trim();
+    const role = document.getElementById('rr').value;
+    let ok = true;
+    document.getElementById('err-name').style.display = 'none';
+    document.getElementById('err-role').style.display = 'none';
+    document.getElementById('rn').style.borderColor = '';
+    document.getElementById('rr').style.borderColor = '';
+    if (!name) { document.getElementById('rn').style.borderColor = '#dc2626'; document.getElementById('err-name').style.display = 'block'; ok = false; }
+    if (!role) { document.getElementById('rr').style.borderColor = '#dc2626'; document.getElementById('err-role').style.display = 'block'; ok = false; }
+    if (!ok) { document.getElementById('rn').scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
   }
-  if (!role) {
-    document.getElementById('rr').style.borderColor = '#dc2626';
-    document.getElementById('err-role').style.display = 'block';
-    valid = false;
-  }
-  if (!valid) {
-    document.getElementById('rn').scrollIntoView({ behavior: 'smooth', block: 'center' });
-    return;
-  }
+  const next = Math.max(0, Math.min(TOTAL_PAGES - 1, currentPage + dir));
+  showPage(next);
+}
+
+async function submitSurvey() {
+  document.getElementById('body-wrap').style.display = 'none';
+  document.getElementById('bottom-nav').style.display = 'none';
+  document.getElementById('submitting-screen').style.display = 'flex';
+  window.scrollTo(0, 0);
 
   const ts = new Date().toISOString().replace('T', ' ').substring(0, 19);
   const row = [
-    ts, name, role,
+    ts,
+    document.getElementById('rn').value.trim(),
+    document.getElementById('rr').value,
     document.getElementById('re').value.trim(),
     document.getElementById('ra').value.trim(),
     getTitles('ian-titles'),
@@ -725,38 +742,44 @@ document.getElementById('survey').addEventListener('submit', async function(e) {
     getTitles('fiona-titles'),
     ...QS.slice(10).map(q => getV(q))
   ];
+  const payload = { headers: HEADERS, row };
 
-  const payload = { headers: HEADERS, row: row };
+  // JSONP submission
+  const cbName = 'gsCb_' + Date.now();
+  const result = await new Promise((resolve) => {
+    const timeout = setTimeout(() => {
+      delete window[cbName];
+      const t = document.getElementById('jsonp-s');
+      if (t) t.remove();
+      resolve('timeout');
+    }, 15000);
+    window[cbName] = (r) => {
+      clearTimeout(timeout);
+      delete window[cbName];
+      const t = document.getElementById('jsonp-s');
+      if (t) t.remove();
+      resolve(r && r.result === 'success' ? 'ok' : 'error');
+    };
+    const s = document.createElement('script');
+    s.id = 'jsonp-s';
+    s.src = ENDPOINT + '?callback=' + cbName + '&data=' + encodeURIComponent(JSON.stringify(payload));
+    s.onerror = () => { clearTimeout(timeout); resolve('error'); };
+    document.head.appendChild(s);
+  });
 
-  document.getElementById('survey').style.display = 'none';
-  document.getElementById('submitting').style.display = 'block';
-  document.getElementById('sub-btn').disabled = true;
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-
-  try {
-    await submitViaJsonp(payload);
-    document.getElementById('submitting').style.display = 'none';
-    document.getElementById('done-screen').style.display = 'block';
-  } catch (err) {
-    // JSONP failed - fall back to no-cors POST which at least delivers the data
-    // even if we can't confirm receipt
+  if (result !== 'ok') {
+    // fallback no-cors POST
     try {
-      await fetch(ENDPOINT, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'text/plain' },
-        body: JSON.stringify(payload)
-      });
-      document.getElementById('submitting').style.display = 'none';
-      document.getElementById('done-screen').style.display = 'block';
-    } catch (err2) {
-      document.getElementById('submitting').style.display = 'none';
-      document.getElementById('error-screen').style.display = 'block';
-      document.getElementById('error-msg').textContent =
-        'Could not reach the server. Check your internet connection and try again, or email your responses directly to Rubina.';
-    }
+      await fetch(ENDPOINT, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(payload) });
+    } catch(e) {}
   }
-});
+
+  document.getElementById('submitting-screen').style.display = 'none';
+  document.getElementById(result === 'error' ? 'error-screen' : 'done-screen').style.display = 'flex';
+}
+
+// init
+showPage(0);
 </script>
 </body>
 </html>
